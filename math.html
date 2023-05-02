@@ -1,0 +1,130 @@
+  <!DOCTYPE html>
+<html>
+<head>
+    <title>Математические задачи</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        ul {
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .problem {
+            margin-bottom: 20px;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: inline-block;
+            background-color: #f8f8f8;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .answer {
+            display: none;
+            font-size: 20px;
+            color: green;
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        function generateProblems() {
+            // Очищаем список задач
+            var list = document.getElementById("problems");
+            list.innerHTML = "";
+
+            // Генерируем 10 случайных задач
+            for (var i = 1; i <= 10; i++) {
+                var a = Math.floor(Math.random() * 15) + 1;
+                var b = Math.floor(Math.random() * 15) + 1;
+                var operation = ["+", "-", "*", "/"][Math.floor(Math.random() * 4)];
+                var result;
+
+                switch (operation) {
+                    case "+":
+                        result = a + b;
+                        break;
+                    case "-":
+                        result = a - b;
+                        break;
+                    case "*":
+                        result = a * b;
+                        break;
+                    case "/":
+                        result = (a / b).toFixed(2);
+                        break;
+                }
+
+                // Создаем элемент списка задач
+                var problem = document.createElement("li");
+                problem.className = "problem";
+                problem.innerHTML = a + " " + operation + " " + b + " = ";
+
+                // Создаем элемент ответа на задачу
+                var answer = document.createElement("span");
+                answer.className = "answer";
+                answer.innerHTML = result;
+
+                // Добавляем элементы на страницу
+                problem.appendChild(answer);
+                list.appendChild(problem);
+            }
+
+            // Добавляем обработчик событий на клик по уравнению
+            var problems = document.getElementsByClassName("problem");
+            for (var i = 0; i < problems.length; i++) {
+                problems[i].onclick = function () {
+                    this.getElementsByClassName("answer")[0].style.display = "inline";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Математические задачи</h1>
+<button onclick="generateProblems()">Перегенерировать задачи</button>
+<ul id="problems"></ul>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Случайные координаты</title>
+    <script>
+function generateCoordinates() {
+  const coordinates = new Set(); // Set to store unique coordinates
+
+  while (coordinates.size < 5) {
+    // Generate random coordinates
+    const lat = (Math.random() * 180 - 90).toFixed(6);
+    const lng = (Math.random() * 360 - 180).toFixed(6);
+
+    // Add coordinates to the Set
+    coordinates.add(`${lat},${lng}`);
+  }
+
+  // Open tabs for each unique coordinate
+  coordinates.forEach((coord, i) => {
+    const link = `https://www.google.com/maps?q=${coord}`;
+        console.log(link);
+
+    window.open(link, `_blank${i}`, "noopener,noreferrer");
+  });
+}
+
+
+    </script>
+</head>
+<body>
+<h1>Случайные координаты</h1>
+<button onclick="generateCoordinates()">Неизвестный местяк (Google Maps)</button>
+</body>
+</html>
+
+
